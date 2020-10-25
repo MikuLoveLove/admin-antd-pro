@@ -1,0 +1,75 @@
+@import '~antd/es/style/themes/default.less';
+
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  //justify-items: center;
+  width: 100%;
+  height: 100%;
+  //text-align: center;
+  background: url("/wave.png") no-repeat;
+  background-size:  auto 100%;
+  .left {
+    display: inline-block;
+    width: 400px;
+    height: 390px;
+    margin-right: 50px;
+    color: aquamarine;
+    background-image: url("/phone.png");
+    background-size: 100% 100%;
+    //@media screen and (max-width: @screen-sm) {
+    // display: none;
+    //}
+    @media screen and (max-width: 880px) {
+      display: none;
+    }
+  }
+  .main {
+    display: inline-block;
+    width: 368px;
+    //margin: 0 auto;
+    margin-left: 50px;
+    padding: 10px 20px;
+    background: #fff;
+    @media screen and (max-width: @screen-sm) {
+      width: 80%;
+    }
+    //@media screen and (max-width: 880px) {
+    //  display: none;
+    //}
+
+    .icon {
+      margin-left: 16px;
+      color: rgba(0, 0, 0, 0.2);
+      font-size: 24px;
+      vertical-align: middle;
+      cursor: pointer;
+      transition: color 0.3s;
+
+      &:hover {
+        color: @primary-color;
+      }
+    }
+
+    .other {
+      margin-top: 24px;
+      line-height: 22px;
+      text-align: left;
+
+      .register {
+        float: right;
+      }
+    }
+
+    :global {
+      .antd-pro-login-submit {
+        width: 100%;
+        margin-top: 24px;
+      }
+    }
+  }
+
+
+}
+

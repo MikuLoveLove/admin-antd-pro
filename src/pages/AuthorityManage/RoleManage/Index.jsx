@@ -1,44 +1,38 @@
-import React, {useState, useEffect, Fragment} from 'react'
-import {history} from 'umi'
+import React, { useState, useEffect } from 'react';
+import { history, connect } from 'umi';
+
 import { PageContainer } from '@ant-design/pro-layout';
-import {PlusOutlined} from '@ant-design/icons';
-import {Table, Button, Input, Space} from 'antd'
-import './index.less'
-import '../index.less'
+import { PlusOutlined } from '@ant-design/icons';
+import { Button, Input, Space } from 'antd';
+import CommonTable from '../../../components/CommonTable';
 
-const {Search} = Input
+import './index.less';
+import '../index.less';
 
-const RoleManage = () => {
+const { Search } = Input;
 
-  const [dataList, setDataListFunc] = useState([])
-
-  const data = [
-    {
-      roleName: '管理员',
-      description: '系统超级管理员',
-      createType: '内置',
-      userCount: 17,
-      roleId: 1
-    }
-  ]
+const RoleManage = (props) => {
+  const [dataList, setDataListFunc] = useState([]);
+  const [pagination, setPagination] = useState({ current: 1, pageSize: 10, total: 0 });
+  const { dispatch, tableLoading } = props;
 
   // 修改、编辑角色
   const addOrEditRole = (type, id) => () => {
-    history.push({
-      pathname: '/authorityManage/roleManage/roleDetail',
-      query: {type, id}
-    })
-  }
+    history.push({ pathname: '/authorityManage/roleManage/roleDetail', query: { type, id } });
+  };
 
   // 删除角色
-  const deleteRole = (id) => () => {
-    console.log(id)
-  }
+  const deleteRole = () => () => {};
 
   // 获取表格数据
-  const getTableList = (params = {}) => {
-    setDataListFunc(data)
-  }
+  const getTableList = (params = { current: 1, pageSize: 10 }) => {
+    dispatch({ type: 'authority/queryRoleList', payload: params }).then((res) => {
+      if (res.status) {
+        setDataListFunc(res.data);
+        setPagination({ current: params.current, pageSize: 10, total: 99 });
+      }
+    });
+  };
 
   const columns = [
     {
@@ -55,40 +49,66 @@ const RoleManage = () => {
       title: '类型',
       dataIndex: 'createType',
       key: 'createType',
+      render: (type) => (type === 1 ? '内置' : '创建'),
     },
     {
       title: '角色人数',
       dataIndex: 'userCount',
-      key: 'userCount'
+      key: 'userCount',
     },
     {
       title: '操作',
-     dataIndex: 'roleId',
-      render: (roleId) => {
-        // console.log(row)
-        return (<Space>
-          <a onClick={addOrEditRole('update', roleId)}>修改</a>
-          <a onClick={deleteRole(roleId)}>删除</a>
-        </Space>)
-      }
-    }
+      render: (row) => {
+        return (
+          <Space>
+            <a onClick={addOrEditRole('update', row.roleId)}>修改</a>
+            {row.createType === 1 ? '' : <a onClick={deleteRole(row.roleId)}>删除</a>}
+          </Space>
+        );
+      },
+    },
   ];
 
-
-// 初始化获取数据
+  // 初始化获取数据
   useEffect(() => {
-    getTableList()
-  }, [])
+    getTableList();
+  }, []);
 
-  return <PageContainer>
-    <div className='role-box'>
-      <div className='table-top'>
-        <Button type="primary" icon={<PlusOutlined/>} onClick={addOrEditRole('add')}>新增角色</Button>
-        <Search placeholder='请输入角色名称' onSearch={(v) => getTableList({name: v})} style={{width: 280}}/>
+  return (
+    <PageContainer>
+      <div className="role-box">
+        <div className="table-top">
+          <Button type="primary" icon={<PlusOutlined />} onClick={addOrEditRole('add')}>
+            新增角色
+          </Button>
+          <Search
+            placeholder="请输入角色名称"
+            onSearch={(v) => getTableList({ name: v })}
+            style={{ width: 280 }}
+          />
+        </div>
+        <CommonTable
+          isLoading={tableLoading}
+          columns={columns}
+          dataSource={dataList}
+          pagination={pagination}
+          onChange={getTableList}
+          rowKey="roleId"
+        />
       </div>
-      <Table columns={columns} dataSource={dataList} rowKey='roleId'/>
-    </div>
-  </PageContainer>
-}
+    </PageContainer>
+  );
+};
 
-export default RoleManage
+export default connect(({ authority, loading }) => ({
+  roleData: authority.roleData,
+  tableLoading: loading.effects['authority/queryRoleList'], // table的loading状态
+}))(RoleManage);
+
+// 原本写法 connect是一个高阶函数 接受函数作为参数并返回一个函数
+// export default connect((dva) => {
+//   return {
+//     roleData: dva.authority.roleData,
+//     tableLoading: dva.loading.effects['authority/queryRoleList'] // table的loading状态
+//   }
+// })(RoleManage)

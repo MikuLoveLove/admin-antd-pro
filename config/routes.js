@@ -7,7 +7,7 @@ const routes = [
         path: '/user/login',
         name: 'login',
         component: './user/login',
-      }
+      },
     ],
   },
   {
@@ -27,12 +27,14 @@ const routes = [
             path: '/home',
             name: 'home',
             icon: 'smile',
+            authority: ['admin', 'user'],
             component: './Home',
           },
           {
             path: '/welcome',
             name: 'welcome',
             icon: 'smile',
+            authority: ['admin', 'user'],
             component: './Welcome',
           },
           {
@@ -59,26 +61,31 @@ const routes = [
           },
           {
             name: 'authorityManage',
-            icon: 'SettingOutlined',
+            // icon: 'SettingOutlined',
+            icon: 'crown',
             path: '/authorityManage',
+            authority: ['admin'],
             routes: [
               {
                 path: '/authorityManage/roleManage',
                 name: 'roleManage',
+                authority: ['admin'],
                 component: './AuthorityManage/RoleManage',
               },
               {
                 path: '/authorityManage/roleManage/roleDetail',
                 name: 'roleDetail',
                 hideInMenu: true,
+                authority: ['admin'],
                 component: './AuthorityManage/RoleManage/RoleDetail',
               },
               {
                 path: '/authorityManage/userManage',
                 name: 'userManage',
+                authority: ['admin'],
                 component: './AuthorityManage/UserManage',
               },
-            ]
+            ],
           },
           {
             component: './404',
@@ -93,6 +100,6 @@ const routes = [
   {
     component: './404',
   },
-]
+];
 
-export default routes
+export default routes;

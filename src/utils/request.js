@@ -4,6 +4,7 @@
  */
 import { extend } from 'umi-request';
 import { notification } from 'antd';
+
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
@@ -27,7 +28,6 @@ const codeMessage = {
 
 const errorHandler = (error) => {
   const { response } = error;
-
   if (response && response.status) {
     const errorText = codeMessage[response.status] || response.statusText;
     const { status, url } = response;
@@ -49,8 +49,25 @@ const errorHandler = (error) => {
  */
 
 const request = extend({
-  errorHandler,
-  // 默认错误处理
+  errorHandler, // 默认错误处理
+  charset: 'utf-8',
   credentials: 'include', // 默认请求是否带上cookie
+  // getResponse: true,
+  // parseResponse: true,
 });
+// request.interceptors.response.use((response) => {
+//   console.log(response)
+//   return response
+// })
+// request.use(async (ctx, next) => {
+//   await next()
+//   const { res } = ctx;
+//   if (res && !res.status) {
+//     notification.error({
+//       description: res.message || '未知错误',
+//       message: '登录错误',
+//     })
+//   }
+// })
+
 export default request;

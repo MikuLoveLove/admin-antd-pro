@@ -78,9 +78,8 @@ const BasicLayout = (props) => {
   const menuDataRef = useRef([]);
   useEffect(() => {
     if (dispatch) {
-      dispatch({
-        type: 'user/fetchCurrent',
-      });
+      dispatch({type: 'user/fetchCurrent',})
+      dispatch({type: 'authority/queryAllRole'})
     }
   }, []);
   /**

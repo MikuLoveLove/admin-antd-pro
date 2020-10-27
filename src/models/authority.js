@@ -1,28 +1,52 @@
-import { getRoleList, getUserList } from '@/services/authority';
+import { getRoleList, getUserList, getAllRole, addUser, deleteUser } from '@/services/authority';
 
 const authorityModel = {
   namespace: 'authority',
   state: {
-    roleData: {
-      roleList: [],
-      total: 0,
-      pageSize: 10,
-      current: 1,
-    },
+    roleList: []
   },
   effects: {
     // 获取角色列表
-    *queryRoleList({ payload }) {
-      return yield getRoleList(payload);
+    * queryRoleList ({payload}) {
+      try {
+        return yield getRoleList(payload);
+      } catch (e) {
+        return e
+      }
+    },
+    // 获取所有角色
+    * queryAllRole (action, {call, put}) {
+      const res = yield call(getAllRole)
+      yield put({type: 'setRoleList', payload: res.data})
     },
     // 获取用户列表
-    *queryUserList({ payload }) {
-      return yield getUserList(payload);
+    * queryUserList ({payload}) {
+      try {
+        return yield getUserList(payload)
+      } catch (e) {
+        return e
+      }
     },
+    // 添加用户
+    * addUser ({payload}) {
+      try {
+        return yield addUser(payload)
+      } catch (e) {
+        return e
+      }
+    },
+    // 删除用户
+    *deleteUser ({payload}) {
+      try {
+        return yield deleteUser(payload)
+      } catch (e) {
+        return e
+      }
+    }
   },
   reducers: {
     setRoleList(state, { payload }) {
-      return { ...state, status: payload.status, type: 'account' };
+      return { ...state, roleList: payload };
     },
   },
 };

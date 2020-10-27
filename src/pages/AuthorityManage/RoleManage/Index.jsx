@@ -28,10 +28,15 @@ const RoleManage = (props) => {
   const getTableList = (params = { current: 1, pageSize: 10 }) => {
     dispatch({ type: 'authority/queryRoleList', payload: params }).then((res) => {
       if (res.status) {
-        setDataListFunc(res.data);
-        setPagination({ current: params.current, pageSize: 10, total: 99 });
+        const {data} = res
+        setDataListFunc(data.list);
+        setPagination({ current: data.current, pageSize: data.pageSize, total: data.total });
       }
     });
+  };
+  // 搜索
+  const searchUser = (val) => {
+    getTableList({ ...pagination, current: 1, keyword: val });
   };
 
   const columns = [
@@ -83,7 +88,7 @@ const RoleManage = (props) => {
           </Button>
           <Search
             placeholder="请输入角色名称"
-            onSearch={(v) => getTableList({ name: v })}
+            onSearch={searchUser}
             style={{ width: 280 }}
           />
         </div>

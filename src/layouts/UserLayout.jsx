@@ -12,7 +12,6 @@ const UserLayout = (props) => {
   const { formatMessage } = useIntl();
   const { breadcrumb } = getMenuData(routes);
   const title = getPageTitle({ pathname: location.pathname, formatMessage, breadcrumb, ...props });
-  console.log(children);
   return (
     <HelmetProvider>
       <Helmet>

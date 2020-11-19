@@ -14,4 +14,7 @@ export const getAllRole = async () => request('/api/getAllRole', { method: 'GET'
 export const addUser = async (data) => request('/api/addUser', { method: 'POST', data });
 
 // 删除用户
-export const deleteUser = async (parmas) => request('/api/deleteUser', { method: 'GET', parmas });
+export const deleteUser = async (id) => request(`/api/deleteUser/${id}`, { method: 'GET' });
+
+// 更新用户
+export const updateUser = async (data) => request(`/api/updateUser`, { method: 'POST', data });

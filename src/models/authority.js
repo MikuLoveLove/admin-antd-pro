@@ -1,4 +1,4 @@
-import { getRoleList, getUserList, getAllRole, addUser, deleteUser } from '@/services/authority';
+import { getRoleList, getUserList, getAllRole, addUser, deleteUser, updateUser } from '@/services/authority';
 
 const authorityModel = {
   namespace: 'authority',
@@ -33,6 +33,14 @@ const authorityModel = {
         return yield addUser(payload)
       } catch (e) {
         return e
+      }
+    },
+    // 修改用户
+    * updateUser ({payload}) {
+      try {
+        return yield updateUser(payload)
+      } catch (e) {
+       return Promise.reject(e)
       }
     },
     // 删除用户

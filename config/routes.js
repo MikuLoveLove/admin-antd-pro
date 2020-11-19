@@ -26,33 +26,33 @@ const routes = [
           {
             path: '/home',
             name: 'home',
-            icon: 'smile',
+            icon: 'home',
             authority: ['admin', 'user'],
             component: './Home',
           },
-          {
-            path: '/welcome',
-            name: 'welcome',
-            icon: 'smile',
-            authority: ['admin', 'user'],
-            component: './Welcome',
-          },
-          {
-            path: '/admin',
-            name: 'admin',
-            icon: 'crown',
-            component: './Admin',
-            authority: ['admin'],
-            routes: [
-              {
-                path: '/admin/sub-page',
-                name: 'sub-page',
-                icon: 'smile',
-                component: './Welcome',
-                authority: ['admin'],
-              },
-            ],
-          },
+          // {
+          //   path: '/welcome',
+          //   name: 'welcome',
+          //   icon: 'smile',
+          //   authority: ['admin', 'user'],
+          //   component: './Welcome',
+          // },
+          // {
+          //   path: '/admin',
+          //   name: 'admin',
+          //   icon: 'crown',
+          //   component: './Admin',
+          //   authority: ['admin'],
+          //   routes: [
+          //     {
+          //       path: '/admin/sub-page',
+          //       name: 'sub-page',
+          //       icon: 'smile',
+          //       component: './Welcome',
+          //       authority: ['admin'],
+          //     },
+          //   ],
+          // },
           {
             name: 'list.table-list',
             icon: 'table',
@@ -60,30 +60,70 @@ const routes = [
             component: './ListTableList',
           },
           {
-            name: 'authorityManage',
-            // icon: 'SettingOutlined',
-            icon: 'crown',
-            path: '/authorityManage',
+            name: 'goodsManage',
+            icon: 'appstore',
+            path: '/goodsManage',
+            routes: [
+              {
+                name: 'category',
+                icon: 'table',
+                path: '/goodsManage/category',
+                authority: ['admin'],
+                component: './GoodsManage/Category'
+              },
+              {
+                name: 'goodsList',
+                icon: 'table',
+                path: '/goodsManage/goodsList',
+                authority: ['admin'],
+                component: './GoodsManage/GoodsList'
+              }
+            ]
+          },
+          {
+            name: 'orderManage',
+            icon: 'container',
+            path: '/orderManage',
+            routes: [
+              {
+                name: 'orderList',
+                icon: 'table',
+                path: '/orderManage/orderList',
+                authority: ['admin'],
+                component: './OrderManage/OrderList'
+              }
+            ]
+          },
+          {
+            name: 'systemSetting',
+            icon: 'SettingOutlined',
+            path: '/systemSetting',
             authority: ['admin'],
             routes: [
               {
-                path: '/authorityManage/roleManage',
+                path: '/systemSetting/roleManage',
                 name: 'roleManage',
                 authority: ['admin'],
-                component: './AuthorityManage/RoleManage',
+                component: './SystemSetting/RoleManage'
               },
               {
-                path: '/authorityManage/roleManage/roleDetail',
+                path: '/systemSetting/roleManage/roleDetail',
                 name: 'roleDetail',
                 hideInMenu: true,
                 authority: ['admin'],
-                component: './AuthorityManage/RoleManage/RoleDetail',
+                component: './SystemSetting/RoleManage/RoleDetail'
               },
               {
-                path: '/authorityManage/userManage',
+                path: '/systemSetting/userManage',
                 name: 'userManage',
                 authority: ['admin'],
-                component: './AuthorityManage/UserManage',
+                component: './SystemSetting/UserManage',
+              },
+              {
+                path: '/systemSetting/authorityList',
+                name: 'authorityList',
+                authority: ['admin'],
+                component: './SystemSetting/AuthorityList',
               },
             ],
           },

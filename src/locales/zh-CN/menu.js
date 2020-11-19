@@ -29,10 +29,20 @@ export default {
   'menu.list.search-list.articles': '搜索列表（文章）',
   'menu.list.search-list.projects': '搜索列表（项目）',
   'menu.list.search-list.applications': '搜索列表（应用）',
-  'menu.authorityManage': '权限管理',
-  'menu.authorityManage.roleManage': '角色管理',
-  'menu.authorityManage.roleDetail': '角色详情',
-  'menu.authorityManage.userManage': '用户管理',
+
+  'menu.goodsManage': '商品管理',
+  'menu.goodsManage.goodsList': '商品列表',
+  'menu.goodsManage.category': '商品分类',
+
+  'menu.orderManage': '订单管理',
+  'menu.orderManage.orderList': '订单列表',
+
+  'menu.systemSetting': '系统设置',
+  'menu.systemSetting.roleManage': '角色管理',
+  'menu.systemSetting.roleDetail': '角色详情',
+  'menu.systemSetting.userManage': '用户管理',
+  'menu.systemSetting.authorityList': '权限列表',
+
   'menu.profile': '详情页',
   'menu.profile.basic': '基础详情页',
   'menu.profile.advanced': '高级详情页',

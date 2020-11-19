@@ -28,6 +28,7 @@ const codeMessage = {
 
 const errorHandler = (error) => {
   const { response } = error;
+  console.log(response)
   if (response && response.status) {
     const errorText = codeMessage[response.status] || response.statusText;
     const { status, url } = response;
@@ -42,7 +43,8 @@ const errorHandler = (error) => {
     });
   }
 
-  return response;
+  // eslint-disable-next-line prefer-promise-reject-errors
+  return Promise.reject({data: null, status: false, message: '请求失败', code: response.status})
 };
 /**
  * 配置request请求时的默认参数

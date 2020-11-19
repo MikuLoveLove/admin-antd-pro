@@ -1,43 +1,62 @@
 @import '~antd/es/style/themes/default.less';
 
-.login {
+.loginWrap {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  //justify-items: center;
   width: 100%;
   height: 100%;
-  //text-align: center;
-  background: url('/wave.png') no-repeat;
-  background-size: auto 100%;
+  //background: linear-gradient(to top right,#3309b5, #73eeff);
+  //background: linear-gradient(to top right, #2b6bcd, #54e2f3);
+  background: linear-gradient(to top right, #35044f, #dfeef3);
+}
+.login {
+  display: flex;
+  width: 900px;
+  height: 500px;
+  margin: auto;
+  border-radius: 12px;
+  box-shadow: 2px 2px 18px 15px #00000024;
+  @media screen and (max-width: 900px) {
+    width: 450px;
+  }
   .left {
-    display: inline-block;
-    width: 400px;
-    height: 390px;
-    margin-right: 50px;
-    color: aquamarine;
-    background-image: url('/phone.png');
+    width: 450px;
+    height: 500px;
+    //background: linear-gradient(to top right, #041458, #574baf);
+    //background: linear-gradient(to top right, #025c9c, #0db1e3);
+    background: rgba(0,0,0,0.1) url("/left.png") no-repeat;
     background-size: 100% 100%;
-    //@media screen and (max-width: @screen-sm) {
-    // display: none;
-    //}
-    @media screen and (max-width: 880px) {
+    border-radius: 12px 0 0 12px;
+    @media screen and (max-width: 900px) {
       display: none;
     }
-  }
-  .main {
-    display: inline-block;
-    width: 368px;
-    //margin: 0 auto;
-    margin-left: 50px;
-    padding: 10px 20px;
-    background: #fff;
-    @media screen and (max-width: @screen-sm) {
-      width: 80%;
+    .leftInner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      color: #d8e5ed;
+      font-size: 26px;
+      line-height: 80px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 12px 0 0 12px;
+      .storeName {
+        font-size: 20px;
+        line-height: 30px;
+      }
     }
-    //@media screen and (max-width: 880px) {
-    //  display: none;
-    //}
+  }
+
+  .main {
+    box-sizing: border-box;
+    width: 450px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 0 12px 12px 0;
+    @media screen and (max-width: 900px) {
+      border-radius: 12px;
+    }
     .messageBox {
       height: 50px;
     }

@@ -8,7 +8,9 @@
 export default {
   dev: {
     '/api/': {
-      target: 'http://localhost:5001',
+    //   target: 'http://10.2.47.141:5001',
+      target: 'http://localhost:6008',
+    //   target: 'http://127.0.0.1:5001',
       // target: 'https://preview.pro.ant.design',
       changeOrigin: true,
       pathRewrite: {
